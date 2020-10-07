@@ -1,7 +1,7 @@
 # wordpress-page-subdomain-lite
 This plugin convert any of your single page into sub domain used for wordpress seo.
 
-# Get the Pro Version Here (https://webostock.com/market-item/wordpress-page-subdomain-pro/31776/)
+# [Get the Pro Version Here] (https://webostock.com/market-item/wordpress-page-subdomain-pro/31776/)
 
 
 
@@ -16,7 +16,7 @@ If you want to know how to add Wildcard Subdomain
 Click here
 
 DEMO
-Check Demo (http://about-us.thesetemplates.info/)
+[Check Demo] (http://about-us.thesetemplates.info/)
 
 PRO FEATURES
 Convert All Pages to Subdomain
@@ -25,4 +25,4 @@ Exclude Pages
 
 Login Cookie
 
-Get Pro (https://webostock.com/market-item/wordpress-page-subdomain-pro/31776/)
+[Get Pro] (https://webostock.com/market-item/wordpress-page-subdomain-pro/31776/)
