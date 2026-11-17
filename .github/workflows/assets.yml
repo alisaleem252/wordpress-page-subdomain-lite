@@ -1,0 +1,26 @@
+name: Update WordPress.org assets and readme
+
+# Pushing to main updates banner/icon/screenshots (.wordpress-org/) and readme.txt
+# on WordPress.org without releasing a new version.
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.wordpress-org/**'
+      - 'readme.txt'
+
+jobs:
+  assets:
+    name: Push assets and readme
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: WordPress.org asset/readme update
+        uses: 10up/action-wordpress-plugin-asset-update@stable
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SLUG: page-as-subdomain-lite
+          IGNORE_OTHER_FILES: true

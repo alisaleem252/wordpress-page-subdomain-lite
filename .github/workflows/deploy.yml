@@ -1,0 +1,33 @@
+name: Deploy to WordPress.org
+
+# Pushing a version tag (e.g. 2.6.0) publishes trunk + a matching SVN tag.
+on:
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+*'
+
+jobs:
+  deploy:
+    name: Deploy plugin
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check tag matches plugin version and Stable tag
+        run: |
+          TAG="${GITHUB_REF_NAME#v}"
+          HEADER=$(grep -m1 -iE '^\s*\*?\s*Version:' page.php | sed -E 's/.*Version:\s*//' | tr -d '[:space:]')
+          STABLE=$(grep -m1 -iE '^Stable tag:' readme.txt | sed -E 's/.*Stable tag:\s*//' | tr -d '[:space:]')
+          echo "tag=$TAG header=$HEADER stable=$STABLE"
+          if [ "$TAG" != "$HEADER" ] || [ "$TAG" != "$STABLE" ]; then
+            echo "::error::Tag, page.php Version and readme.txt Stable tag must all match."
+            exit 1
+          fi
+
+      - name: WordPress plugin deploy
+        uses: 10up/action-wordpress-plugin-deploy@stable
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SLUG: page-as-subdomain-lite
+          VERSION: ${{ github.ref_name }}
